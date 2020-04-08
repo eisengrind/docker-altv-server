@@ -1,0 +1,28 @@
+jobs:
+  include:
+    - branch: master
+      condition: "$TRAVIS_TAG =~ ^release-[0-9]+$"
+      services:
+      - docker
+      before_script:
+      - docker version
+      env:
+      - DOTNET_VERSION="1.28.42"
+      script:
+      - splitTag=(${TRAVIS_TAG//-/ })
+      - branch=${splitTag[0]}
+      - build=${splitTag[1]}
+      - image="eisengrind/altv-server"
+      - imageTagged="$image:$branch-$build"
+      - docker build . --build-arg BUILD=$build --build-arg BRANCH=$branch -t $imageTagged
+      - docker tag $imageTagged $image:latest
+      - docker build . -f ./dotnet.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t $imageTagged-dotnet-$DOTNET_VERSION
+      - docker tag $imageTagged-dotnet-$DOTNET_VERSION $imageTagged-dotnet
+      - docker build . -f ./nodejs.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t $imageTagged-nodejs
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker push $imageTagged-dotnet-$DOTNET_VERSION
+      - docker push $imageTagged-dotnet
+      - docker push $image:latest
+      - docker push $imageTagged
+      - docker push $imageTagged-nodejs
+      - docker logout
