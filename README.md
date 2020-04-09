@@ -13,7 +13,7 @@ The Docker image for the alt:V server comes in three different versions:
 
 ## Usage
 
-Visit the image on (Docker Hub)[https://hub.docker.com/r/eisengrind/altv-server].
+Visit the image on [Docker Hub](https://hub.docker.com/r/eisengrind/altv-server).
 
 ### No modules
 
