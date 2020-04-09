@@ -3,7 +3,7 @@ jobs:
     - branch: master
       if: |
         tag IS present &&
-        tag =~ /^[release|dev|rc]-[0-9]+$/
+        tag =~ /^(release|dev|rc)-[0-9]+$/
       services:
       - docker
       before_script:
