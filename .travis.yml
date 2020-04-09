@@ -1,7 +1,9 @@
 jobs:
   include:
     - branch: master
-      condition: "$TRAVIS_TAG =~ ^release-[0-9]+$"
+      if: |
+        tag IS present &&
+        tag =~ /^release-[0-9]+$/
       services:
       - docker
       before_script:
