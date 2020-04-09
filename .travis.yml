@@ -9,7 +9,9 @@ jobs:
       env:
       - DOTNET_VERSION="1.28.42"
       script:
-      - splitTag=(${TRAVIS_TAG//-/ })
+      - travisTag=$TRAVIS_TAG
+      - splitTag=(${travisTag//-/ })
+      - echo ${splitTag[@]}
       - branch=${splitTag[0]}
       - build=${splitTag[1]}
       - image="eisengrind/altv-server"
