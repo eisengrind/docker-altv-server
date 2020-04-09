@@ -2,7 +2,7 @@
 ARG BRANCH="release"
 ARG BUILD=""
 
-FROM eisengrind/altv-server:${BUILD}
+FROM eisengrind/altv-server:${BRANCH}-${BUILD}
 
 ARG BRANCH="release"
 ARG BUILD=""
