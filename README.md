@@ -1,11 +1,11 @@
 
 # docker-altv-server
 
-A Docker image providing the Alt:V server.
+A Docker image providing the alt:V server.
 
 ## About
 
-The Docker image for the Alt:V server comes in three different versions:
+The Docker image for the alt:V server comes in three different versions:
 
 - with no modules
 - with the NodeJS module
@@ -33,7 +33,7 @@ docker start -it eisengrind/altv-server:release-1098-dotnet
 
 ## Build
 
-For the `$build` and `$branch` variables you have to enter the regarding Alt:V versioning values.
+For the `$build` and `$branch` variables you have to enter the regarding alt:V versioning values.
 
 ### No modules
 
@@ -67,7 +67,7 @@ FROM eisengrind/altv-server:release-1098-nodejs
 RUN mkdir -p /opt/altv/resources/test-resource
 ```
 
-This example, however, just creates an empty folder within the Alt:V resources folder.
+This example, however, just creates an empty folder within the alt:V resources folder.
 
 ## License
 
