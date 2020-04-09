@@ -2,7 +2,6 @@
 FROM debian:buster-slim
 
 ARG BRANCH=release
-ARG BUILD=""
 
 COPY ./.docker/scripts/entrypoint.sh /root/
 
@@ -12,7 +11,7 @@ RUN apt-get update && \
     mkdir -p /opt/altv/modules && \
     mkdir -p /opt/altv/resources && \
 #
-    wget --no-cache -q -O /opt/altv/altv-server https://cdn.altv.mp/server/${BRANCH}/x64_linux/altv-server?salt=${BUILD} && \
+    wget --no-cache -q -O /opt/altv/altv-server https://cdn.altv.mp/server/${BRANCH}/x64_linux/altv-server && \
 #
     chmod +x /opt/altv/altv-server /root/entrypoint.sh && \
 #

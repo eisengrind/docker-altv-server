@@ -17,44 +17,54 @@ Visit the image on [Docker Hub](https://hub.docker.com/r/eisengrind/altv-server)
 
 ### No modules
 
+Starts the latest release of the server with no modules.
+
 ```sh
-docker start -it eisengrind/altv-server:release-1098
+docker start -it eisengrind/altv-server:release
 ```
 
 ### NodeJS module
 
+Starts the latest release of the server with the NodeJS module
+
 ```sh
-docker start -it eisengrind/altv-server:release-1098-nodejs
+docker start -it eisengrind/altv-server:release-nodejs
 ```
 
 ### C# module
 
+Starts the latest release of the server with the C# module
+
 ```sh
-docker start -it eisengrind/altv-server:release-1098-dotnet
+docker start -it eisengrind/altv-server:release-dotnet
 ```
 
 ## Build
 
 For the `$build` and `$branch` variables you have to enter the regarding alt:V versioning values.
 
+**`$build`** represents the build number of the server source files. E.g. **`$build=1098`**
+
+**`$branch`** represents the branch where the server build was released. E.g. **`$branch=release`**
+
 ### No modules
 
 ```sh
-docker build . --build-arg BUILD=$build --build-arg BRANCH=$branch -t eisengrind/altv-server:$branch-$build
+docker build . --build-arg BRANCH=$branch -t eisengrind/altv-server:$build
 ```
 
 ### NodeJS module
 
 ```sh
-docker build . --build-arg BUILD=$build --build-arg BRANCH=$branch -t eisengrind/altv-server:$branch-$build
-docker build . -f ./nodejs.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t eisengrind/altv-server:$branch-$build-nodejs
+docker build . --build-arg BRANCH=$branch -t eisengrind/altv-server:$build
+docker build . -f ./nodejs.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t eisengrind/altv-server:$build-nodejs
 ```
 
 ### C# module
 
 ```sh
-docker build . --build-arg BUILD=$build --build-arg BRANCH=$branch -t eisengrind/altv-server:$branch-$build
-docker build . -f ./dotnet.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t eisengrind/altv-server:$branch-$build-dotnet-1.28.42
+docker build . --build-arg BRANCH=$branch -t eisengrind/altv-server:$build
+docker build . -f ./dotnet.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t eisengrind/altv-server:$build-dotnet
 ```
 
 ## Usage with a custom Dockerfile
@@ -64,7 +74,7 @@ Most of the time if you are using containers, especially images, correctly, you 
 You can use this images as a base for your future customizations:
 
 ```Dockerfile
-FROM eisengrind/altv-server:release-1098-nodejs
+FROM eisengrind/altv-server:release-nodejs
 
 RUN mkdir -p /opt/altv/resources/test-resource
 ```

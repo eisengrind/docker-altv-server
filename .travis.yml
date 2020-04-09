@@ -9,24 +9,32 @@ jobs:
       before_script:
       - docker version
       env:
-      - DOTNET_VERSION="1.28.42"
+      - IMAGE="eisengrind/altv-server"
       script:
       - travisTag=$TRAVIS_TAG
       - splitTag=(${travisTag//-/ })
       - echo ${splitTag[@]}
       - branch=${splitTag[0]}
       - build=${splitTag[1]}
-      - image="eisengrind/altv-server"
-      - imageTagged="$image:$branch-$build"
-      - docker build . --build-arg BUILD=$build --build-arg BRANCH=$branch -t $imageTagged
-      - docker tag $imageTagged $image:latest
-      - docker build . -f ./dotnet.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t $imageTagged-dotnet-$DOTNET_VERSION
-      - docker tag $imageTagged-dotnet-$DOTNET_VERSION $imageTagged-dotnet
-      - docker build . -f ./nodejs.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t $imageTagged-nodejs
+
+      - docker build . --build-arg BRANCH=$branch -t $IMAGE:$build
+      - docker tag $IMAGE:$build $IMAGE:$branch
+
+      - docker build . -f ./dotnet.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t $IMAGE:$build-dotnet
+      - docker tag $IMAGE:$build-dotnet $IMAGE:$branch-dotnet
+
+      - docker build . -f ./nodejs.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t $IMAGE:$build-nodejs
+      - docker tag $IMAGE:$build-nodejs $IMAGE:$branch-nodejs
+
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker push $imageTagged-dotnet-$DOTNET_VERSION
-      - docker push $imageTagged-dotnet
-      - docker push $image:latest
-      - docker push $imageTagged
-      - docker push $imageTagged-nodejs
+
+      - docker push $IMAGE:$build
+      - docker push $IMAGE:$branch
+
+      - docker push $IMAGE:$branch-dotnet
+      - docker push $IMAGE:$build-dotnet
+
+      - docker push $IMAGE:$build-nodejs
+      - docker push $IMAGE:$branch-nodejs
+
       - docker logout
