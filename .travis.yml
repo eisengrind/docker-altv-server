@@ -26,7 +26,7 @@ jobs:
       - docker build . -f ./nodejs.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t $IMAGE:$build-nodejs
       - docker tag $IMAGE:$build-nodejs $IMAGE:$branch-nodejs
 
-      - docker build . -f ./nodejs-dotnet.Dockerfile --build-arg=$branch-dotnet --build-arg BRANCH=$branch -t $IMAGE:$build-nodejs-dotnet
+      - docker build . -f ./nodejs-dotnet.Dockerfile --build-arg BUILD=$build-dotnet --build-arg BRANCH=$branch -t $IMAGE:$build-nodejs-dotnet
       - docker tag $IMAGE:$build-nodejs-dotnet $IMAGE:$branch-nodejs-dotnet
 
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
