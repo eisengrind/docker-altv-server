@@ -36,6 +36,8 @@ fi
 
 if [ "$ALTV_SERVER_NO_LOGFILE" = "true" ]; then
     ALTV_SERVER_NO_LOGFILE="--no-logfile"
+else
+    ALTV_SERVER_NO_LOGFILE=""
 fi
 
 if [ "$ALTV_SERVER_JUSTPACK" = "true" ]; then
