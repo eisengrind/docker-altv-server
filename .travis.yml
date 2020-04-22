@@ -2,6 +2,25 @@ jobs:
   include:
     - branch: master
       if: |
+        NOT tag IS present
+      services:
+      - docker
+      before_script:
+      - docker version
+      - sudo apt-get -y install jq wget
+      env:
+      - IMAGE="eisengrind/altv-server"
+      script:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - |
+        for BRANCH in dev stable rc release
+        do
+           BUILD=$(wget --no-cache -qO- http://cdn.altv.mp/server/$BRANCH/x64_linux/update-info.json | jq '.latestBuildNumber')
+           ./scripts/push.sh
+        done
+      - docker logout
+    - branch: master
+      if: |
         tag IS present &&
         tag =~ /^(stable|release|rc|dev)-[0-9]+$/
       services:
@@ -14,33 +33,11 @@ jobs:
       - travisTag=$TRAVIS_TAG
       - splitTag=(${travisTag//-/ })
       - echo ${splitTag[@]}
-      - branch=${splitTag[0]}
-      - build=${splitTag[1]}
-
-      - docker build . --build-arg BRANCH=$branch -t $IMAGE:$build
-      - docker tag $IMAGE:$build $IMAGE:$branch
-
-      - docker build . -f ./dotnet.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t $IMAGE:$build-dotnet
-      - docker tag $IMAGE:$build-dotnet $IMAGE:$branch-dotnet
-
-      - docker build . -f ./nodejs.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t $IMAGE:$build-nodejs
-      - docker tag $IMAGE:$build-nodejs $IMAGE:$branch-nodejs
-
-      - docker build . -f ./nodejs-dotnet.Dockerfile --build-arg BUILD=$build-dotnet --build-arg BRANCH=$branch -t $IMAGE:$build-nodejs-dotnet
-      - docker tag $IMAGE:$build-nodejs-dotnet $IMAGE:$branch-nodejs-dotnet
+      - BRANCH=${splitTag[0]}
+      - BUILD=${splitTag[1]}
 
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
-      - docker push $IMAGE:$build
-      - docker push $IMAGE:$branch
-
-      - docker push $IMAGE:$branch-dotnet
-      - docker push $IMAGE:$build-dotnet
-
-      - docker push $IMAGE:$build-nodejs
-      - docker push $IMAGE:$branch-nodejs
-
-      - docker push $IMAGE:$build-nodejs-dotnet
-      - docker push $IMAGE:$branch-nodejs-dotnet
+      - ./scripts/push.sh
 
       - docker logout
