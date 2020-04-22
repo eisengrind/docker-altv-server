@@ -6,8 +6,8 @@ jobs:
       services:
       - docker
       before_script:
-      - docker version
       - sudo apt-get -y install jq wget
+      - chmod +x ./scripts/push.sh
       env:
       - IMAGE="eisengrind/altv-server"
       script:
@@ -26,7 +26,7 @@ jobs:
       services:
       - docker
       before_script:
-      - docker version
+      - chmod +x ./scripts/push.sh
       env:
       - IMAGE="eisengrind/altv-server"
       script:
