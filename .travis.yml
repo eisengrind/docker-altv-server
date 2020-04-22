@@ -15,7 +15,7 @@ jobs:
       - |
         for BRANCH in dev stable rc release
         do
-           BUILD=$(wget --no-cache -qO- http://cdn.altv.mp/server/${BRANCH}/x64_linux/update-info.json | jq '.latestBuildNumber') && ./scripts/push.sh
+           ./scripts/push.sh $IMAGE $BRANCH $(wget --no-cache -qO- http://cdn.altv.mp/server/${BRANCH}/x64_linux/update-info.json | jq '.latestBuildNumber')
         done
       - docker logout
     - branch: master
@@ -37,6 +37,6 @@ jobs:
 
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
-      - ./scripts/push.sh
+      - ./scripts/push.sh $IMAGE $BRANCH $BUILD
 
       - docker logout
