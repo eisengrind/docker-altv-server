@@ -3,19 +3,19 @@ jobs:
     - branch: master
       if: |
         NOT tag IS present
+      env:
+      - IMAGE="eisengrind/altv-server"
       services:
       - docker
       before_script:
       - sudo apt-get -y install jq wget
       - chmod +x ./scripts/push.sh
-      env:
-      - IMAGE="eisengrind/altv-server"
       script:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - |
         for BRANCH in dev stable rc release
         do
-           BUILD=$(wget --no-cache -qO- http://cdn.altv.mp/server/$BRANCH/x64_linux/update-info.json | jq '.latestBuildNumber')
+           BUILD=$(wget --no-cache -qO- http://cdn.altv.mp/server/${BRANCH}/x64_linux/update-info.json | jq '.latestBuildNumber')
            ./scripts/push.sh
         done
       - docker logout
