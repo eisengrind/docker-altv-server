@@ -81,6 +81,18 @@ RUN mkdir -p /opt/altv/resources/test-resource
 
 This example, however, just creates an empty folder within the alt:V resources folder.
 
+### Note on Docker caching
+
+We provide two different kinds of tags for the alt:V Docker image: specific and non-specific image tags.
+
+In general, this means that specific tags represent a unique alt:V build version whereas a non-specific tag such as `release...` or `dev...` represents the latest build number of the regarding branch.
+
+Thus, once an image with a non-specific tag is pulled, this image will not automatically get updated by Docker unless you remove and pull the image again from Docker Hub.
+
+This is why we provide specific tags. Those kind of tags do explicitly not lead to a caching problem, because specific tags are not meant to be, once they are published, changed.
+
+**tl;dr Keep in mind that you should always specify a specific tag in a Dockerfile.**
+
 ## License
 
 See the [LICENSE](https://github.com/eisengrind/docker-altv-server/blob/master/LICENSE)-file for more information.
