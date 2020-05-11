@@ -1,7 +1,7 @@
 
 <p align="center"><img src=".github/assets/logo-256px.png"></p>
 
-<h1 align="center">AltV Server for Docker</h1>
+<h1 align="center">alt:V server for Docker</h1>
 
 A Docker image providing the alt:V server.
 
