@@ -10,6 +10,7 @@ The Docker image for the alt:V server comes in three different versions:
 - with no modules
 - with the NodeJS module
 - with the C# module
+- with both modules (NodeJS and C#)
 
 ## Usage
 
@@ -20,7 +21,7 @@ Visit the image on [Docker Hub](https://hub.docker.com/r/eisengrind/altv-server)
 Starts the latest release of the server with no modules.
 
 ```sh
-docker start -it eisengrind/altv-server:release
+docker run -it eisengrind/altv-server:release
 ```
 
 ### NodeJS module
@@ -28,7 +29,7 @@ docker start -it eisengrind/altv-server:release
 Starts the latest release of the server with the NodeJS module
 
 ```sh
-docker start -it eisengrind/altv-server:release-nodejs
+docker run -it eisengrind/altv-server:release-nodejs
 ```
 
 ### C# module
@@ -36,7 +37,15 @@ docker start -it eisengrind/altv-server:release-nodejs
 Starts the latest release of the server with the C# module
 
 ```sh
-docker start -it eisengrind/altv-server:release-dotnet
+docker run -it eisengrind/altv-server:release-dotnet
+```
+
+### Both modules (NodeJS and C#)
+
+Starts the latest release of the server with both modules
+
+```sh
+docker run -it eisengrind/altv-server:release-nodejs-dotnet
 ```
 
 ## Build
@@ -65,6 +74,14 @@ docker build . -f ./nodejs.Dockerfile --build-arg BUILD=$build --build-arg BRANC
 ```sh
 docker build . --build-arg BRANCH=$branch -t eisengrind/altv-server:$build
 docker build . -f ./dotnet.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t eisengrind/altv-server:$build-dotnet
+```
+
+### Both modules (NodeJS and C#)
+
+```sh
+docker build . --build-arg BRANCH=$branch -t eisengrind/altv-server:$build
+docker build . -f ./dotnet.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t eisengrind/altv-server:$build-dotnet
+docker build . -f ./nodejs-dotnet.Dockerfile --build-arg BUILD=$build-dotnet --build-arg BRANCH=$branch -t eisengrind/altv-server:$build-nodejs-dotnet
 ```
 
 ## Using custom vehicle data
