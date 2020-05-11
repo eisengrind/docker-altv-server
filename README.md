@@ -1,5 +1,5 @@
 
-<p align="center"><img src=".github/assets/logo-256px"></p>
+<p align="center"><img src=".github/assets/logo-256px.png"></p>
 
 <h1 align="center">AltV Server for Docker</h1>
 
