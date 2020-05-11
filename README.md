@@ -1,9 +1,9 @@
 
 <p align="center"><img src=".github/assets/logo-256px.png"></p>
 
-<h1 align="center">Unofficial alt:V server for Docker</h1>
+<h1 align="center">Unofficial alt:V server Docker image</h1>
 
-The unofficial alt:V server for Docker.
+The unofficial alt:V server Docker image.
 
 ## About
 
