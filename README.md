@@ -1,5 +1,7 @@
 
-# docker-altv-server
+<p align="center"><img src=".github/assets/logo-256px"></p>
+
+<h1 align="center">AltV Server for Docker</h1>
 
 A Docker image providing the alt:V server.
 
