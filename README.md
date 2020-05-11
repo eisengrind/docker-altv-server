@@ -67,6 +67,10 @@ docker build . --build-arg BRANCH=$branch -t eisengrind/altv-server:$build
 docker build . -f ./dotnet.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t eisengrind/altv-server:$build-dotnet
 ```
 
+## Using custom vehicle data
+
+To use custom vehicle data, you can mount a volume to the directory `/opt/altv/data/`. By using the volume you can then overwrite the `vehmodels.bin` and `vehmods.bin` files.
+
 ## Usage with a custom Dockerfile
 
 Most of the time if you are using containers, especially images, correctly, you will create a customized Docker image. For example by adding resources to a container which will represent a current version of your files.

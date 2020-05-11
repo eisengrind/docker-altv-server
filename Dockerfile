@@ -10,8 +10,12 @@ RUN apt-get update && \
 #
     mkdir -p /opt/altv/modules && \
     mkdir -p /opt/altv/resources && \
+    mkdir -p /opt/altv/data && \
 #
     wget --no-cache -q -O /opt/altv/altv-server https://cdn.altv.mp/server/${BRANCH}/x64_linux/altv-server && \
+# download default vehicle data
+    wget --no-cache -q -O /opt/altv/data/vehmodels.bin http://cdn.altv.mp/server/${BRANCH}/x64_linux/data/vehmodels.bin && \
+    wget --no-cache -q -O /opt/altv/data/vehmods.bin http://cdn.altv.mp/server/${BRANCH}/x64_linux/data/vehmods.bin && \
 #
     chmod +x /opt/altv/altv-server /root/entrypoint.sh && \
 #
