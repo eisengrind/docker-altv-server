@@ -31,7 +31,6 @@ jobs:
       script:
       - travisTag=$TRAVIS_TAG
       - splitTag=(${travisTag//-/ })
-      - echo ${splitTag[@]}
       - BRANCH=${splitTag[0]}
       - BUILD=${splitTag[1]}
 
