@@ -5,6 +5,7 @@
 </p>
 
 <h1 align="center">Unofficial alt:V server Docker image</h1>
+<p align="center"><i>Searching for the alt:V voice server image? <a href="https://github.com/eisengrind/docker-altv-voice-server">Click here</a></i></p>
 
 The unofficial alt:V server Docker image.
 
@@ -109,7 +110,7 @@ This example, however, just creates an empty folder within the alt:V resources f
 
 ### Note on Docker caching
 
-We provide two different kinds of tags for the alt:V Docker image: specific and non-specific image tags.
+We provide two different kinds of tags for the alt:V Docker images: specific and non-specific image tags.
 
 In general, this means that specific tags represent a unique alt:V build version whereas a non-specific tag such as `release...` or `dev...` represents the latest build number of the regarding branch.
 
@@ -121,4 +122,4 @@ This is why we provide specific tags. Those kind of tags do explicitly not lead 
 
 ## License
 
-See the [LICENSE](https://github.com/eisengrind/docker-altv-server/blob/master/LICENSE)-file for more information.
+See the [LICENSE](https://github.com/eisengrind/docker-altv-server/blob/master/LICENSE)-file for further information.
