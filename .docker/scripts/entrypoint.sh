@@ -51,7 +51,7 @@ if [ "$ALTV_SERVER_JUSTPACK" = "true" ]; then
     ALTV_SERVER_JUSTPACK="--justpack"
 fi
 
-local voiceCfg=""
+voiceCfg=""
 
 if [ ! -z "$ALTV_SERVER_VOICE_BITRATE" ] || \
    [ ! -z "$ALTV_SERVER_VOICE_EXTERNAL_SECRET" ] || \
