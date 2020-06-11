@@ -4,38 +4,50 @@ jobs:
       if: |
         NOT tag IS present
       env:
-      - IMAGE="eisengrind/altv-server"
+        - IMAGE="eisengrind/altv-server"
       services:
-      - docker
+        - docker
       before_script:
-      - sudo apt-get -y install jq wget
-      - chmod +x ./scripts/push.sh
+        - sudo apt-get -y install jq wget
+        - chmod +x ./scripts/push.sh
       script:
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - |
-        for BRANCH in dev stable rc release
-        do
-           ./scripts/push.sh $IMAGE $BRANCH $(wget --no-cache -qO- http://cdn.altv.mp/server/${BRANCH}/x64_linux/update-info.json | jq '.latestBuildNumber')
-        done
-      - docker logout
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - |
+          for BRANCH in dev rc release
+          do
+            ./scripts/push.sh \
+              $IMAGE \
+              $BRANCH \
+              $(wget --no-cache -qO- http://cdn.altv.mp/server/${BRANCH}/x64_linux/update.json | jq '.latestBuildNumber') \
+              $(wget --no-cache -qO- http://cdn.altv.mp/js-module/${BRANCH}/x64_linux/update.json | jq '.latestBuildNumber') \
+              $(wget --no-cache -qO- http://cdn.altv.mp/coreclr-module/${BRANCH}/x64_linux/update.json | jq '.latestBuildNumber')
+          done
+        - docker logout
     - branch: master
       if: |
         tag IS present &&
-        tag =~ /^(stable|release|rc|dev)-[0-9]+$/
+        tag =~ /^(release|rc|dev)-[0-9]+:js-[0-9]+:dotnet-[0-9]+$/
       services:
-      - docker
+        - docker
       before_script:
-      - chmod +x ./scripts/push.sh
+        - chmod +x ./scripts/push.sh
       env:
-      - IMAGE="eisengrind/altv-server"
+        - IMAGE="eisengrind/altv-server"
       script:
-      - travisTag=$TRAVIS_TAG
-      - splitTag=(${travisTag//-/ })
-      - BRANCH=${splitTag[0]}
-      - BUILD=${splitTag[1]}
+        - travisTag=$TRAVIS_TAG
+        - parts=(${travisTag//:/ })
+        - gameServerTag=(${parts[0]})
+        - BRANCH=${gameServerTag[0]}
+        - BUILD=${gameServerTag[1]}
+        - jsModuleTag=(${parts[1]})
+        - jsModuleTagSplit=(${jsModuleTag//-/ })
+        - jsModuleBuild=${jsModuleTagSplit[1]}
+        - csharpModuleTag=(${parts[2]})
+        - csharpModuleTagSplit=(${csharpModuleTag//-/ })
+        - csharpModuleBuild=${csharpModuleSplit[1]}
 
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
-      - ./scripts/push.sh $IMAGE $BRANCH $BUILD
+        - ./scripts/push.sh $IMAGE $BRANCH $BUILD $jsModuleBuild $csharpModuleBuild
 
-      - docker logout
+        - docker logout
