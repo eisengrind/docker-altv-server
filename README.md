@@ -14,9 +14,9 @@ The unofficial alt:V server Docker image.
 The Docker image for the alt:V server comes in three different versions:
 
 - with no modules
-- with the NodeJS module
+- with the JS module
 - with the C# module
-- with both modules (NodeJS and C#)
+- with both modules (JS and C#)
 
 ## Usage
 
@@ -30,12 +30,12 @@ Starts the latest release of the server with no modules.
 docker run -it eisengrind/altv-server:release
 ```
 
-### NodeJS module
+### JS module
 
-Starts the latest release of the server with the NodeJS module
+Starts the latest release of the server with the JS module
 
 ```sh
-docker run -it eisengrind/altv-server:release-nodejs
+docker run -it eisengrind/altv-server:release-js
 ```
 
 ### C# module
@@ -46,12 +46,12 @@ Starts the latest release of the server with the C# module
 docker run -it eisengrind/altv-server:release-dotnet
 ```
 
-### Both modules (NodeJS and C#)
+### Both modules (JS and C#)
 
 Starts the latest release of the server with both modules
 
 ```sh
-docker run -it eisengrind/altv-server:release-nodejs-dotnet
+docker run -it eisengrind/altv-server:release-js-dotnet
 ```
 
 ## Build
@@ -68,11 +68,11 @@ For the `$build` and `$branch` variables you have to enter the regarding alt:V v
 docker build . --build-arg BRANCH=$branch -t eisengrind/altv-server:$build
 ```
 
-### NodeJS module
+### JS module
 
 ```sh
 docker build . --build-arg BRANCH=$branch -t eisengrind/altv-server:$build
-docker build . -f ./nodejs.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t eisengrind/altv-server:$build-nodejs
+docker build . -f ./js.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t eisengrind/altv-server:$build-js
 ```
 
 ### C# module
@@ -82,12 +82,12 @@ docker build . --build-arg BRANCH=$branch -t eisengrind/altv-server:$build
 docker build . -f ./dotnet.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t eisengrind/altv-server:$build-dotnet
 ```
 
-### Both modules (NodeJS and C#)
+### Both modules (JS and C#)
 
 ```sh
 docker build . --build-arg BRANCH=$branch -t eisengrind/altv-server:$build
 docker build . -f ./dotnet.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t eisengrind/altv-server:$build-dotnet
-docker build . -f ./nodejs-dotnet.Dockerfile --build-arg BUILD=$build-dotnet --build-arg BRANCH=$branch -t eisengrind/altv-server:$build-nodejs-dotnet
+docker build . -f ./js-dotnet.Dockerfile --build-arg BUILD=$build-dotnet --build-arg BRANCH=$branch -t eisengrind/altv-server:$build-js-dotnet
 ```
 
 ## Using custom vehicle data
@@ -101,7 +101,7 @@ Most of the time if you are using containers, especially images, correctly, you 
 You can use this images as a base for your future customizations:
 
 ```Dockerfile
-FROM eisengrind/altv-server:release-nodejs
+FROM eisengrind/altv-server:release-js
 
 RUN mkdir -p /opt/altv/resources/test-resource
 ```
