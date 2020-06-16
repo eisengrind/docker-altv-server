@@ -15,3 +15,4 @@ RUN apt-get install -y wget jq && \
     apt-get clean
 
 ENV ALTV_SERVER_MODULES='csharp-module,js-module'
+ENV LD_LIBRARY_PATH=/opt/altv/modules/js-module/
