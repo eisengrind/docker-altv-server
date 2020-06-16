@@ -29,15 +29,12 @@ jobs:
         run: |
           echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
-          # stable does not exist yet
-          for BRANCH in stable dev rc release
+          for BRANCH in dev rc release
           do
             ./scripts/push.sh \
               $IMAGE \
               $BRANCH \
-              $(wget --no-cache -qO- http://cdn.altv.mp/server/${BRANCH}/x64_linux/update.json | jq '.latestBuildNumber') \
-              $(wget --no-cache -qO- http://cdn.altv.mp/js-module/${BRANCH}/x64_linux/update.json | jq '.latestBuildNumber') \
-              $(wget --no-cache -qO- http://cdn.altv.mp/coreclr-module/${BRANCH}/x64_linux/update.json | jq '.latestBuildNumber')
+              $(wget --no-cache -qO- http://cdn.altv.mp/server/${BRANCH}/x64_linux/update.json | jq '.latestBuildNumber')
           done
 
           docker logout

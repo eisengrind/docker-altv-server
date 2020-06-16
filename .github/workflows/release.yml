@@ -25,18 +25,9 @@ jobs:
         run: |
           echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
-          tag=$TRAVIS_TAG
-          parts=(${travisTag//:/ })
-          gameServerTag=(${parts[0]})
-          BRANCH=${gameServerTag[0]}
-          BUILD=${gameServerTag[1]}
-          jsModuleTag=(${parts[1]})
-          jsModuleTagSplit=(${jsModuleTag//-/ })
-          jsModuleBuild=${jsModuleTagSplit[1]}
-          csharpModuleTag=(${parts[2]})
-          csharpModuleTagSplit=(${csharpModuleTag//-/ })
-          csharpModuleBuild=${csharpModuleSplit[1]}
+          BRANCH=$(echo $TRAVIS_TAG | | grep -o '[a-zA-z]*' | head -1)
+          BUILD=$(echo $TRAVIS_TAG | sed -e 's/^[a-zA-Z]*-//g')
 
-          ./scripts/push.sh $IMAGE $BRANCH $BUILD $jsModuleBuild $csharpModuleBuild
+          ./scripts/push.sh $IMAGE $BRANCH $BUILD
 
           docker logout
