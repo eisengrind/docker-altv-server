@@ -3,10 +3,9 @@ name: ReleaseCI
 on:
   push:
     tags:
-      - "release-[0-9]+:js-[0-9]+:dotnet-[0-9]+"
-      - "rc-[0-9]+:js-[0-9]+:dotnet-[0-9]+"
-      - "dev-[0-9]+:js-[0-9]+:dotnet-[0-9]+"
-      - "stable-[0-9]+:js-[0-9]+:dotnet-[0-9]+"
+      - "release-[a-zA-Z0-9]+"
+      - "rc-[a-zA-Z0-9]+"
+      - "dev-[a-zA-Z0-9]+"
 
 jobs:
   build:
