@@ -25,16 +25,13 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y jq wget
       - name: modify push.sh
         run: chmod +x ./scripts/push.sh
-      - name: build & push voice server images
-        run: |
-          echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-
-          for BRANCH in dev rc release
-          do
-            ./scripts/push.sh \
-              $IMAGE \
-              $BRANCH \
-              $(wget --no-cache -qO- http://cdn.altv.mp/server/${BRANCH}/x64_linux/update.json | jq '.latestBuildNumber')
-          done
-
-          docker logout
+      - name: login to DockerHub
+        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      - name: build dev
+        run: ./scripts/push.sh $IMAGE dev $(wget --no-cache -qO- http://cdn.altv.mp/server/dev/x64_linux/update.json | jq '.latestBuildNumber')
+      - name: build rc
+        run: ./scripts/push.sh $IMAGE rc $(wget --no-cache -qO- http://cdn.altv.mp/server/rc/x64_linux/update.json | jq '.latestBuildNumber')
+      - name: build release
+        run: ./scripts/push.sh $IMAGE release $(wget --no-cache -qO- http://cdn.altv.mp/server/release/x64_linux/update.json | jq '.latestBuildNumber')
+      - name: logout from DockerHub
+        run: docker logout
