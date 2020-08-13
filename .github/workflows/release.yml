@@ -20,11 +20,11 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y jq wget
       - name: modify push.sh
         run: chmod +x ./scripts/push.sh
-      - name: build & push voice server images
+      - name: build & push altv server images
         run: |
           echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
-          BRANCH=$(echo $TRAVIS_TAG | | grep -o '[a-zA-z]*' | head -1)
+          BRANCH=$(echo $TRAVIS_TAG | grep -o '[a-zA-z]*' | head -1)
           BUILD=$(echo $TRAVIS_TAG | sed -e 's/^[a-zA-Z]*-//g')
 
           ./scripts/push.sh $IMAGE $BRANCH $BUILD
