@@ -1,7 +1,7 @@
 
 <p align="center"><img src=".github/assets/logo-256px.png"></p>
 <p align="center">
-<a href="https://travis-ci.com/eisengrind/docker-altv-server"><img src="https://travis-ci.com/eisengrind/docker-altv-server.svg?branch=master"></a>
+[![Actions Status](https://github.com/eisengrind/docker-altv-server/workflows/ReleaseCI/badge.svg)](https://github.com/eisengrind/docker-altv-server/actions)
 </p>
 
 <h1 align="center">Unofficial alt:V server Docker image</h1>
