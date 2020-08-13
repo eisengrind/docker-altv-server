@@ -29,9 +29,6 @@ jobs:
           BRANCH=${splitTag[0]}
           BUILD=${splitTag[1]}
 
-          BRANCH=$(echo $TRAVIS_TAG | grep -o '[a-zA-z]*' | head -1)
-          BUILD=$(echo $TRAVIS_TAG | sed -e 's/^[a-zA-Z]*-//g')
-
           ./scripts/push.sh $IMAGE $BRANCH $BUILD
 
           docker logout
