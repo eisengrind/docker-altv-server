@@ -24,6 +24,11 @@ jobs:
         run: |
           echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
+          tag=${GITHUB_REF##*/}
+          splitTag=(${tag//-/ })
+          BRANCH=${splitTag[0]}
+          BUILD=${splitTag[1]}
+
           BRANCH=$(echo $TRAVIS_TAG | grep -o '[a-zA-z]*' | head -1)
           BUILD=$(echo $TRAVIS_TAG | sed -e 's/^[a-zA-Z]*-//g')
 
