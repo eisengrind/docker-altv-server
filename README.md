@@ -1,7 +1,8 @@
 
 <p align="center"><img src=".github/assets/logo-256px.png"></p>
+
 <p align="center">
-[![Actions Status](https://github.com/eisengrind/docker-altv-server/workflows/ReleaseCI/badge.svg)](https://github.com/eisengrind/docker-altv-server/actions)
+  <a href="https://github.com/eisengrind/docker-altv-server/actions"><img src="https://github.com/eisengrind/docker-altv-server/workflows/ReleaseCI/badge.svg"></a>
 </p>
 
 <h1 align="center">Unofficial alt:V server Docker image</h1>
