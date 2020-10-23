@@ -2,10 +2,9 @@ name: ReleaseCI
 
 on:
   push:
+    # "simple regex" for releases; source: https://gist.github.com/jhorsman/62eeea161a13b80e39f5249281e17c39
     tags:
-      - "release-[a-zA-Z0-9]+"
-      - "rc-[a-zA-Z0-9]+"
-      - "dev-[a-zA-Z0-9]+"
+      - '(release|rc|dev) \| (([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?|[a-zA-Z0-9]+)'
 
 jobs:
   build:
@@ -25,7 +24,7 @@ jobs:
           echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
           tag=${GITHUB_REF##*/}
-          splitTag=(${tag//-/ })
+          splitTag=(${tag// \| / })
           BRANCH=${splitTag[0]}
           BUILD=${splitTag[1]}
 
