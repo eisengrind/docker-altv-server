@@ -11,7 +11,7 @@ jobs:
     if: github.event.base_ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     env:
-      IMAGE: eisengrind/altv-voice-server
+      IMAGE: eisengrind/altv-server
     steps:
       - uses: actions/checkout@v2
         name: checkout
