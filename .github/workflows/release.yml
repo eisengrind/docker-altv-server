@@ -2,9 +2,9 @@ name: ReleaseCI
 
 on:
   push:
-    # "simple regex" for releases; source: https://gist.github.com/jhorsman/62eeea161a13b80e39f5249281e17c39
+    # "simple regex" for releases; source: https://github.com/semver/semver/issues/232
     tags:
-      - '(release|rc|dev) \| (([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?|[a-zA-Z0-9]+)'
+      - '(release|rc|dev) \| ((0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-(0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(\.(0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*)?(\+[0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*)?|[a-zA-Z0-9]+)'
 
 jobs:
   build:
