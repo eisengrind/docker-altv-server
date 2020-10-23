@@ -3,7 +3,9 @@ name: ReleaseCI
 on:
   push:
     tags:
-      - (release|rc|dev)\|*
+      - release_*
+      - rc_*
+      - dev_*
 
 jobs:
   build:
@@ -23,7 +25,7 @@ jobs:
           echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
           tag=${GITHUB_REF##*/}
-          splitTag=(${tag//\|/ })
+          splitTag=(${tag//_/ })
           BRANCH=${splitTag[0]}
           BUILD=${splitTag[1]}
 
