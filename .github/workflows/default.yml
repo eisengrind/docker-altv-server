@@ -27,11 +27,13 @@ jobs:
         run: chmod +x ./scripts/push.sh
       - name: login to DockerHub
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      - name: add version function
+        run: getVersion() { wget --no-cache -qO- http://cdn.altv.mp/server/$1/x64_linux/update.json > /tmp/update.json; ([ $(cat /tmp/update.json | jq '.version') == null ] && jq '.latestBuildNumber' || jq -r '.version') < /tmp/update.json; }
       - name: build dev
-        run: ./scripts/push.sh $IMAGE dev $(wget --no-cache -qO- http://cdn.altv.mp/server/dev/x64_linux/update.json | jq '.latestBuildNumber')
+        run: ./scripts/push.sh $IMAGE dev $(getVersion dev)
       - name: build rc
-        run: ./scripts/push.sh $IMAGE rc $(wget --no-cache -qO- http://cdn.altv.mp/server/rc/x64_linux/update.json | jq '.latestBuildNumber')
+        run: ./scripts/push.sh $IMAGE rc $(getVersion rc)
       - name: build release
-        run: ./scripts/push.sh $IMAGE release $(wget --no-cache -qO- http://cdn.altv.mp/server/release/x64_linux/update.json | jq '.latestBuildNumber')
+        run: ./scripts/push.sh $IMAGE release $(getVersion release)
       - name: logout from DockerHub
         run: docker logout
