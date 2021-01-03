@@ -11,12 +11,13 @@ ALTV_SERVER_GAMEMODE=${ALTV_SERVER_GAMEMODE:-"none"}
 ALTV_SERVER_WEBSITE=${ALTV_SERVER_WEBSITE:-""}
 ALTV_SERVER_LANGUAGE=${ALTV_SERVER_LANGUAGE:-"en"}
 ALTV_SERVER_DESCRIPTION=${ALTV_SERVER_DESCRIPTION:-"A Alt:V server running in a Docker container."}
-ALTV_SERVER_MODULES=${ALTV_SERVER_MODULES:-""}
+ALTV_SERVER_MODULES=${ALTV_SERVER_MODULES:-"csharp-module,js-module"}
 ALTV_SERVER_RESOURCES=${ALTV_SERVER_RESOURCES:-""}
 ALTV_SERVER_LOG_PATH=${ALTV_SERVER_LOG_PATH:-""}
 ALTV_SERVER_NO_LOGFILE=${ALTV_SERVER_NO_LOGFILE:-"true"}
 ALTV_SERVER_JUSTPACK=${ALTV_SERVER_JUSTPACK:-""}
 ALTV_SERVER_DEBUG=${ALTV_SERVER_DEBUG:-"false"}
+ALTV_SERVER_DOTNET_VERSION=${ALTV_SERVER_DOTNET_VERSION:-"3"}
 
 ALTV_SERVER_VOICE_BITRATE=${ALTV_SERVER_VOICE_BITRATE:-""}
 ALTV_SERVER_VOICE_EXTERNAL_SECRET=${ALTV_SERVER_VOICE_EXTERNAL_SECRET:-""}
@@ -93,6 +94,37 @@ if [ ! -z "$ALTV_SERVER_VOICE_BITRATE" ] || \
      $ALTV_SERVER_VOICE_EXTERNAL_PUBLIC_PORT
    }
    "
+fi
+
+if [ "$ALTV_SERVER_DOTNET_VERSION" = "5" ]; then
+
+cat <<EOF >/opt/altv/AltV.Net.Host.runtimeconfig.json
+{
+  "runtimeOptions": {
+    "tfm": "net5.0",
+    "framework": {
+      "name": "Microsoft.NETCore.App",
+      "version": "5.0.0"
+    }
+  }
+}
+EOF
+
+else
+
+# we assume dotnet version 3 to be the default
+cat <<EOF >/opt/altv/AltV.Net.Host.runtimeconfig.json
+{
+  "runtimeOptions": {
+    "tfm": "netcoreapp3.1",
+    "framework": {
+      "name": "Microsoft.NETCore.App",
+      "version": "3.1.0"
+    }
+  }
+}
+EOF
+
 fi
 
 cat <<EOF >/opt/altv/server.cfg

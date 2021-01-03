@@ -12,48 +12,12 @@ The unofficial alt:V server Docker image.
 
 ## About
 
-The Docker image for the alt:V server comes in three different versions:
-
-- with no modules
-- with the JS module
-- with the C# module
-- with both modules (JS and C#)
+The Docker image for the alt:V server including all commonly used modules. Currently, the `js-module` and the `csharp-module` are supported. Your module can of course be added too! Feel free to make a PR to add your module!
 
 ## Usage
 
 Visit the image on [Docker Hub](https://hub.docker.com/r/eisengrind/altv-server).
 
-### No modules
-
-Starts the latest release of the server with no modules.
-
-```sh
-docker run -it eisengrind/altv-server:release
-```
-
-### JS module
-
-Starts the latest release of the server with the JS module
-
-```sh
-docker run -it eisengrind/altv-server:release-js
-```
-
-### C# module
-
-Starts the latest release of the server with the C# module
-
-```sh
-docker run -it eisengrind/altv-server:release-dotnet
-```
-
-### Both modules (JS and C#)
-
-Starts the latest release of the server with both modules
-
-```sh
-docker run -it eisengrind/altv-server:release-js-dotnet
-```
 
 ## Build
 
@@ -62,34 +26,6 @@ For the `$build` and `$branch` variables you have to enter the regarding alt:V v
 **`$build`** represents the build number of the server source files. E.g. **`$build=1098`**
 
 **`$branch`** represents the branch where the server build was released. E.g. **`$branch=release`**
-
-### No modules
-
-```sh
-docker build . --build-arg BRANCH=$branch -t eisengrind/altv-server:$build
-```
-
-### JS module
-
-```sh
-docker build . --build-arg BRANCH=$branch -t eisengrind/altv-server:$build
-docker build . -f ./js.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t eisengrind/altv-server:$build-js
-```
-
-### C# module
-
-```sh
-docker build . --build-arg BRANCH=$branch -t eisengrind/altv-server:$build
-docker build . -f ./dotnet.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t eisengrind/altv-server:$build-dotnet
-```
-
-### Both modules (JS and C#)
-
-```sh
-docker build . --build-arg BRANCH=$branch -t eisengrind/altv-server:$build
-docker build . -f ./dotnet.Dockerfile --build-arg BUILD=$build --build-arg BRANCH=$branch -t eisengrind/altv-server:$build-dotnet
-docker build . -f ./js-dotnet.Dockerfile --build-arg BUILD=$build-dotnet --build-arg BRANCH=$branch -t eisengrind/altv-server:$build-js-dotnet
-```
 
 ## Using custom vehicle data
 
@@ -102,7 +38,7 @@ Most of the time if you are using containers, especially images, correctly, you 
 You can use this images as a base for your future customizations:
 
 ```Dockerfile
-FROM eisengrind/altv-server:release-js
+FROM eisengrind/altv-server:release
 
 RUN mkdir -p /opt/altv/resources/test-resource
 ```
@@ -120,6 +56,16 @@ Thus, once an image with a non-specific tag is pulled, this image will not autom
 This is why we provide specific tags. Those kind of tags do explicitly not lead to a caching problem, because specific tags are not meant to be, once they are published, changed.
 
 **tl;dr Keep in mind that you should always specify a specific tag in a Dockerfile.**
+
+### Note on Docker image security
+
+Since this images inherits from the `debian:buster-slim` image, we schedule nightly builds every 24 hours to reduce security invulnerabilities.
+
+We highly recommend to update the altv-server image as frequent as possible.
+
+Keep in mind that, because of the frequent updates, we overwrite the image tags `release`, `dev`, `rc` aswell as their build versions.
+
+To use a specific image, we recommend using their Sha-256 digest hash as an image selector.
 
 ## License
 
