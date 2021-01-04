@@ -34,15 +34,10 @@ RUN apt-get install -y wget jq && \
 ######
 RUN apt-get install -y wget gnupg && \
     # install dotnet runtime(s)
-    wget -O- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg && \
-    mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/ && \
-    wget https://packages.microsoft.com/config/debian/10/prod.list && \
-    mv prod.list /etc/apt/sources.list.d/microsoft-prod.list && \
-    chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg && \
-    chown root:root /etc/apt/sources.list.d/microsoft-prod.list && \
+    wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+    dpkg -i packages-microsoft-prod.deb && \
     apt-get update && \
-    apt-get -y install apt-transport-https && \
-    apt-get -y install dotnet-runtime-3.1 dotnet-runtime-5.0 && \
+    apt-get -y install apt-transport-https dotnet-runtime-3.1 dotnet-runtime-5.0 && \
     # install altV module
     wget --no-cache -q -O /opt/altv/modules/libcsharp-module.so https://cdn.altv.mp/coreclr-module/${BRANCH}/x64_linux/modules/libcsharp-module.so && \
     mkdir -p /usr/share/dotnet/host/fxr/ && \
