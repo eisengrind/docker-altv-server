@@ -36,6 +36,7 @@ RUN apt-get install -y wget gnupg && \
     # install dotnet runtime(s)
     wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
     dpkg -i packages-microsoft-prod.deb && \
+    rm -f packages-microsoft-prod.deb && \
     apt-get update && \
     apt-get -y install apt-transport-https dotnet-runtime-3.1 dotnet-runtime-5.0 && \
     # install altV module
