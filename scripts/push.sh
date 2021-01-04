@@ -3,9 +3,8 @@
 IMAGE=$1
 BRANCH=$2
 BUILD=$3
-
-HASH=$(echo "$BRANCH-$BUILD-$(date)" | sha1sum)
-SHORT_HASH=$($HASH | cut -c1-8)
+HASH=$(echo "$BRANCH-$BUILD-$(date --iso-8601=minutes)" | sha1sum | head -c 40)
+SHORT_HASH=$(echo $HASH | cut -c1-8)
 
 echo "build image"
 docker build . --build-arg BRANCH=$BRANCH -t $IMAGE:$BUILD
