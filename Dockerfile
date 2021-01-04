@@ -41,7 +41,8 @@ RUN apt-get install -y wget gnupg && \
     chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg && \
     chown root:root /etc/apt/sources.list.d/microsoft-prod.list && \
     apt-get update && \
-    apt-get -y install apt-transport-https dotnet-runtime-3.1 dotnet-runtime-5.0 && \
+    apt-get -y install apt-transport-https && \
+    apt-get -y install dotnet-runtime-3.1 dotnet-runtime-5.0 && \
     # install altV module
     wget --no-cache -q -O /opt/altv/modules/libcsharp-module.so https://cdn.altv.mp/coreclr-module/${BRANCH}/x64_linux/modules/libcsharp-module.so && \
     mkdir -p /usr/share/dotnet/host/fxr/ && \
