@@ -16,8 +16,29 @@ The Docker image for the alt:V server including all commonly used modules. Curre
 
 ## Usage
 
-Visit the image on [Docker Hub](https://hub.docker.com/r/eisengrind/altv-server).
+To get started just run the Docker image as follows:
 
+```sh
+docker run -it --rm eisengrind/altv-server:release
+```
+
+### Configuring the alt:V server
+
+Since we can not provide a file to the alt:V without adding a volume, you can configure the alt:V server using container environment variables.
+
+See `.docker/scripts/entrypoint.sh` for all available environment variables.
+
+Before the server starts, the entrypoint script writes the alt:V server configuration using the input environment variables, so you don't have to provide a configuration file.
+
+### Switching between .NET versions
+
+To switch between .NET versions, you have to provide the `ALTV_SERVER_DOTNET_VERSION` environment variable. By default this variable is `3`.
+
+Example:
+
+```sh
+docker run -it -e ALTV_SERVER_DOTNET_VERSION=5 --rm eisengrind/altv-server:release
+```
 
 ## Build
 
