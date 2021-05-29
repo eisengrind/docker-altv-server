@@ -46,7 +46,7 @@ if [ ! -z "$ALTV_SERVER_WEBSITE" ]; then
 fi
 
 if [ ! -z "$ALTV_SERVER_LOG_PATH" ]; then
-    ALTV_SERVER_LOG_PATH="--logfile=$ALTV_SERVER_LOG_PATH"
+    ALTV_SERVER_LOG_PATH="--logfile $ALTV_SERVER_LOG_PATH"
 fi
 
 if [ "$ALTV_SERVER_NO_LOGFILE" = "true" ]; then
