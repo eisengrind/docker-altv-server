@@ -99,7 +99,8 @@ if [ ! -z "$ALTV_SERVER_VOICE_BITRATE" ] || \
    fi
    
    if [ ! -z "$ALTV_SERVER_EARLYAUTH_URL" ]; then
-    ALTV_SERVER_EARLYAUTH_URL="useEarlyAuth: true\nearlyAuthUrl: $ALTV_SERVER_EARLYAUTH_URL"
+    ALTV_SERVER_EARLYAUTH_URL="useEarlyAuth: true
+earlyAuthUrl: \"$ALTV_SERVER_EARLYAUTH_URL\""
    fi
 
    voiceCfg="voice: {
