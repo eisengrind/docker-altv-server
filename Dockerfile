@@ -1,5 +1,5 @@
 
-FROM debian:buster-slim
+FROM ubuntu:focal-20210723
 
 ARG BRANCH=release
 
