@@ -5,6 +5,7 @@ on:
     branches: [master]
   pull_request:
     branches: []
+  # Update the image every now and then
   schedule:
     - cron: "0 2 * * *"
     - cron: "0 14 * * *"
