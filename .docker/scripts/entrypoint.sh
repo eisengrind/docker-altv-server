@@ -31,9 +31,6 @@ ALTV_SERVER_VOICE_EXTERNAL_PUBLIC_PORT=${ALTV_SERVER_VOICE_EXTERNAL_PUBLIC_PORT:
 # alt:V server CDN options
 ALTV_SERVER_CDN_URL=${ALTV_SERVER_CDN_URL:-""}
 
-# alt:V .NET 3.1 / 5.0 options
-ALTV_SERVER_DOTNET_VERSION=${ALTV_SERVER_DOTNET_VERSION:-"5"}
-
 if [ ! -z "$ALTV_SERVER_PASSWORD" ]; then
     ALTV_SERVER_PASSWORD="password: $ALTV_SERVER_PASSWORD"
 fi
@@ -114,36 +111,17 @@ earlyAuthUrl: \"$ALTV_SERVER_EARLYAUTH_URL\""
 "
 fi
 
-if [ "$ALTV_SERVER_DOTNET_VERSION" = "5" ]; then
-
 cat <<EOF >/opt/altv/AltV.Net.Host.runtimeconfig.json
 {
   "runtimeOptions": {
-    "tfm": "net5.0",
+    "tfm": "net6",
     "framework": {
       "name": "Microsoft.NETCore.App",
-      "version": "5.0.0"
+      "version": "6.0.0"
     }
   }
 }
 EOF
-
-else
-
-# we assume dotnet version 3 to be the default
-cat <<EOF >/opt/altv/AltV.Net.Host.runtimeconfig.json
-{
-  "runtimeOptions": {
-    "tfm": "netcoreapp3.1",
-    "framework": {
-      "name": "Microsoft.NETCore.App",
-      "version": "3.1.0"
-    }
-  }
-}
-EOF
-
-fi
 
 cat <<EOF >/opt/altv/server.cfg
 name: "$ALTV_SERVER_NAME"

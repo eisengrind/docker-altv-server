@@ -31,7 +31,7 @@ RUN apt-get install -y wget jq && \
     apt-get clean
 
 ######
-# Install .NET (3.1 and 5) Module
+# Install .NET 6 Module
 ######
 RUN apt-get install -y wget gnupg && \
     # install dotnet runtime(s)
@@ -39,7 +39,7 @@ RUN apt-get install -y wget gnupg && \
     dpkg -i packages-microsoft-prod.deb && \
     rm -f packages-microsoft-prod.deb && \
     apt-get update && \
-    apt-get -y install apt-transport-https dotnet-runtime-3.1 dotnet-runtime-5.0 && \
+    apt-get -y install apt-transport-https dotnet-runtime-6.0 && \
     # install altV module
     wget --no-cache -q -O /opt/altv/modules/libcsharp-module.so https://cdn.altv.mp/coreclr-module/${BRANCH}/x64_linux/modules/libcsharp-module.so && \
     mkdir -p /usr/share/dotnet/host/fxr/ && \

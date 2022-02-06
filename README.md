@@ -10,6 +10,11 @@
 
 The unofficial alt:V server Docker image.
 
+<div style="background-color: rgba(200, 0, 0, 0.4); padding: 5px 10px 10px 10px; border-radius: 10px; border: 1px solid rgba(50, 0, 0, 1)">
+  <h2>Breaking Change with alt:V 9.x</h2>
+  <p>Removed support for .NET versions older than .NET 6</p>
+</div>
+
 ## About
 
 The Docker image for the alt:V server including all commonly used modules. Currently, the `js-module` and the `csharp-module` are supported. Your module can of course be added too! Feel free to make a PR to add your module!
@@ -29,16 +34,6 @@ Since we can not provide a file to the alt:V without adding a volume, you can co
 See `.docker/scripts/entrypoint.sh` for all available environment variables.
 
 Before the server starts, the entrypoint script writes the alt:V server configuration using the input environment variables, so you don't have to provide a configuration file.
-
-### Switching between .NET versions
-
-To switch between .NET versions, you have to provide the `ALTV_SERVER_DOTNET_VERSION` environment variable. By default this variable is `3`.
-
-Example:
-
-```sh
-docker run -it -e ALTV_SERVER_DOTNET_VERSION=5 --rm eisengrind/altv-server:release
-```
 
 ## Build
 
