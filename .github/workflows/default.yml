@@ -32,7 +32,7 @@ jobs:
       - name: login to DockerHub
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       - name: build dev
-        run: ./scripts/push.sh $IMAGE dev $(./scripts/getVersion.sh dev)
+        run: LIBNODE_VERSION=102 ./scripts/push.sh $IMAGE dev $(./scripts/getVersion.sh dev)
       - name: build rc
         run: ./scripts/push.sh $IMAGE rc $(./scripts/getVersion.sh rc)
       - name: build release
