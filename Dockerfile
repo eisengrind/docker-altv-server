@@ -2,6 +2,7 @@
 FROM ubuntu:focal-20210723
 
 ARG BRANCH=release
+ARG LIBNODE_VERSION=83
 
 COPY ./.docker/scripts/entrypoint.sh /root/
 
@@ -24,7 +25,7 @@ RUN apt-get update && \
 ######
 RUN apt-get install -y wget jq && \
     mkdir -p /opt/altv/modules/js-module/ && \
-    wget --no-cache -q -O /opt/altv/modules/js-module/libnode.so.83 https://cdn.altv.mp/js-module/${BRANCH}/x64_linux/modules/js-module/libnode.so.83 && \
+    wget --no-cache -q -O /opt/altv/modules/js-module/libnode.so.83 https://cdn.altv.mp/js-module/${BRANCH}/x64_linux/modules/js-module/libnode.so.${LIBNODE_VERSION} && \
     wget --no-cache -q -O /opt/altv/modules/js-module/libjs-module.so https://cdn.altv.mp/js-module/${BRANCH}/x64_linux/modules/js-module/libjs-module.so && \
     apt-get purge -y wget jq && \
     apt autoremove -y && \
