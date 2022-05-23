@@ -25,7 +25,7 @@ RUN apt-get update && \
 ######
 RUN apt-get install -y wget jq && \
     mkdir -p /opt/altv/modules/js-module/ && \
-    wget --no-cache -q -O /opt/altv/modules/js-module/libnode.so.102 https://cdn.altv.mp/js-module/${BRANCH}/x64_linux/modules/js-module/libnode.so.${LIBNODE_VERSION} && \
+    wget --no-cache -q -O /opt/altv/modules/js-module/libnode.so.${LIBNODE_VERSION} https://cdn.altv.mp/js-module/${BRANCH}/x64_linux/modules/js-module/libnode.so.${LIBNODE_VERSION} && \
     wget --no-cache -q -O /opt/altv/modules/js-module/libjs-module.so https://cdn.altv.mp/js-module/${BRANCH}/x64_linux/modules/js-module/libjs-module.so && \
     wget --no-cache -q -O /opt/altv/modules/js-module/libjs-bytecode-module.so https://cdn.altv.mp/js-bytecode-module/${BRANCH}/x64_linux/modules/libjs-bytecode-module.so && \
     apt-get purge -y wget jq && \
