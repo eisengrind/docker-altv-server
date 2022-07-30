@@ -21,10 +21,10 @@ jobs:
       - name: install deps
         run: sudo apt-get update && sudo apt-get install -y jq wget
       - name: set script permissions
-        run: chmod +x ./scripts/push.sh ./scripts/getVersion.sh
+        run: chmod +x ./scripts/ci-build.sh ./scripts/image-build.sh ./scripts/getVersion.sh
       - name: build dev
-        run: LIBNODE_VERSION=102 ./scripts/push.sh $IMAGE dev $(./scripts/getVersion.sh dev)
+        run: ./scripts/ci-build.sh $IMAGE dev $(./scripts/getVersion.sh dev)
       - name: build rc
-        run: ./scripts/push.sh $IMAGE rc $(./scripts/getVersion.sh rc)
+        run: ./scripts/ci-build.sh $IMAGE rc $(./scripts/getVersion.sh rc)
       - name: build release
-        run: ./scripts/push.sh $IMAGE release $(./scripts/getVersion.sh release)
+        run: ./scripts/ci-build.sh $IMAGE release $(./scripts/getVersion.sh release)
