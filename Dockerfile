@@ -7,7 +7,7 @@ ARG LIBNODE_VERSION=102
 COPY ./.docker/scripts/entrypoint.sh /root/
 
 RUN apt-get update && \
-    apt-get install -y wget jq gnupg libatomic1 libc-bin apt-transport-https dotnet-runtime-6.0 && \
+    apt-get install -y wget jq gnupg libatomic1 libc-bin apt-transport-https && \
     mkdir -p /opt/altv/modules && \
     mkdir -p /opt/altv/resources && \
     mkdir -p /opt/altv/data && \
@@ -32,6 +32,8 @@ RUN apt-get update && \
     wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
     dpkg -i packages-microsoft-prod.deb && \
     rm -f packages-microsoft-prod.deb && \
+    apt-get update && \
+    apt-get install dotnet-runtime-6.0 && \
     # install altV module
     wget --no-cache -q -O /opt/altv/modules/libcsharp-module.so https://cdn.altv.mp/coreclr-module/${BRANCH}/x64_linux/modules/libcsharp-module.so && \
     mkdir -p /usr/share/dotnet/host/fxr/ && \
