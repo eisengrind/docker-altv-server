@@ -1,5 +1,5 @@
 
-FROM ubuntu:focal-20210723
+FROM ubuntu:focal
 
 ARG BRANCH=release
 ARG LIBNODE_VERSION=102
