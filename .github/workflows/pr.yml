@@ -1,0 +1,32 @@
+name: DefaultCI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  default-build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    env:
+      IMAGE: eisengrind/altv-server
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+        name: checkout
+      - name: install deps
+        run: sudo apt-get update && sudo apt-get install -y jq wget
+      - name: set script permissions
+        run: chmod +x ./scripts/push.sh ./scripts/getVersion.sh
+      - name: build dev
+        run: LIBNODE_VERSION=102 ./scripts/push.sh $IMAGE dev $(./scripts/getVersion.sh dev)
+      - name: build rc
+        run: ./scripts/push.sh $IMAGE rc $(./scripts/getVersion.sh rc)
+      - name: build release
+        run: ./scripts/push.sh $IMAGE release $(./scripts/getVersion.sh release)
