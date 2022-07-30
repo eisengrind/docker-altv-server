@@ -2,9 +2,8 @@ name: DefaultCI
 
 on:
   push:
-    branches: [master]
-  pull_request:
-    branches: []
+    branches:
+      - master
   # Update the image every now and then
   schedule:
     - cron: "0 2 * * *"
