@@ -33,7 +33,7 @@ RUN apt-get update && \
     dpkg -i packages-microsoft-prod.deb && \
     rm -f packages-microsoft-prod.deb && \
     apt-get update && \
-    apt-get install dotnet-runtime-6.0 && \
+    apt-get install dotnet-runtime-6.0 -y && \
     # install altV module
     wget --no-cache -q -O /opt/altv/modules/libcsharp-module.so https://cdn.altv.mp/coreclr-module/${BRANCH}/x64_linux/modules/libcsharp-module.so && \
     mkdir -p /usr/share/dotnet/host/fxr/ && \
