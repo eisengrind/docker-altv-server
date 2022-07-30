@@ -1,4 +1,3 @@
-
 <p align="center"><img src=".github/assets/logo-256px.png"></p>
 
 <p align="center">
@@ -46,6 +45,8 @@ For the `$build` and `$branch` variables you have to enter the regarding alt:V v
 ## Using custom vehicle data
 
 To use custom vehicle data, you can mount a volume to the directory `/opt/altv/data/`. By using the volume you can then overwrite the `vehmodels.bin` and `vehmods.bin` files.
+
+You ofc also can just copy the vehicle data to a new `Dockerfile` that inherits from the base `eisengrind/altv-server` image.
 
 ## Usage with a custom Dockerfile
 
