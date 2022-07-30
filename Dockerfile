@@ -7,7 +7,7 @@ ARG LIBNODE_VERSION=102
 COPY ./.docker/scripts/entrypoint.sh /root/
 
 RUN apt-get update && \
-    apt-get install -y wget jq gnupg libatomic1 libc-bin apt-transport-https && \
+    apt-get install -y wget gnupg libatomic1 libc-bin apt-transport-https && \
     mkdir -p /opt/altv/modules && \
     mkdir -p /opt/altv/resources && \
     mkdir -p /opt/altv/data && \
@@ -39,7 +39,7 @@ RUN apt-get update && \
     mkdir -p /usr/share/dotnet/host/fxr/ && \
     wget --no-cache -q -O /opt/altv/AltV.Net.Host.dll https://cdn.altv.mp/coreclr-module/${BRANCH}/x64_linux/AltV.Net.Host.dll && \
     # remove unused tools
-    apt-get purge -y wget jq gnupg && \
+    apt-get purge -y wget gnupg apt-transport-https && \
     apt autoremove -y && \
     apt-get clean
 
