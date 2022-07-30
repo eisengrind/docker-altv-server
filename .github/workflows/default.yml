@@ -28,14 +28,14 @@ jobs:
       - name: install deps
         run: sudo apt-get update && sudo apt-get install -y jq wget
       - name: set script permissions
-        run: chmod +x ./scripts/image-push.sh ./scripts/image-build.sh  ./scripts/getVersion.sh
+        run: chmod +x ./scripts/ci-push.sh ./scripts/image-build.sh ./scripts/image-push.sh  ./scripts/getVersion.sh
       - name: login to DockerHub
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       - name: build dev
-        run: ./scripts/image-push.sh $IMAGE dev $(./scripts/getVersion.sh dev)
+        run: ./scripts/ci-push.sh $IMAGE dev $(./scripts/getVersion.sh dev)
       - name: build rc
-        run: ./scripts/image-push.sh $IMAGE rc $(./scripts/getVersion.sh rc)
+        run: ./scripts/ci-push.sh $IMAGE rc $(./scripts/getVersion.sh rc)
       - name: build release
-        run: ./scripts/image-push.sh $IMAGE release $(./scripts/getVersion.sh release)
+        run: ./scripts/ci-push.sh $IMAGE release $(./scripts/getVersion.sh release)
       - name: logout from DockerHub
         run: docker logout

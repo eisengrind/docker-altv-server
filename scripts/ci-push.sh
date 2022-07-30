@@ -7,3 +7,4 @@ export HASH=$(echo "$BRANCH-$BUILD-$(date --iso-8601=minutes)" | sha1sum | head 
 export SHORT_HASH=$(echo $HASH | cut -c1-8)
 
 $(dirname "$0")/image-build.sh
+$(dirname "$0")/image-push.sh
