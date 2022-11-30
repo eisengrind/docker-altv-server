@@ -2,8 +2,7 @@
   <configuration default="false" name="[DEBUG] go build" type="GoApplicationRunConfiguration" factoryName="Go Application">
     <module name="configurator" />
     <working_directory value="$PROJECT_DIR$" />
-    <go_parameters value="-i" />
-    <parameters value="--output-filename server --output-type yaml" />
+    <parameters value="create  --output server.yaml" />
     <envs>
       <env name="ALTV_SERVER_CSHARP_MODULE_DISABLE_DEPENDENCY_DOWNLOAD" value="true" />
       <env name="ALTV_SERVER_DEBUG" value="true" />
