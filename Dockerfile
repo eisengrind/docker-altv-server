@@ -21,7 +21,8 @@ ARG INSTALL_CLOTHES=true
 ARG INSTALL_JS_MODULE=true
 ARG INSTALL_CSHARP_MODULE=true
 
-ENV ALTV_SERVER_MODULES="csharp-module,js-module"
+ARG ALTV_SERVER_MODULES="csharp-module,js-module"
+ENV ALTV_SERVER_MODULES=${ALTV_SERVER_MODULES}
 
 COPY ./.docker/scripts/install.sh ./.docker/scripts/entrypoint.sh /root/
 COPY --from=configurator /usr/src/app/configurator /opt/altv/configurator
