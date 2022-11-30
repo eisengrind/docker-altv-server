@@ -43,6 +43,17 @@ if [ "$INSTALL_CSHARP_MODULE" = "true" ]; then
     wget --no-cache -q -O /opt/altv/modules/libcsharp-module.so https://cdn.altv.mp/coreclr-module/${BRANCH}/x64_linux/modules/libcsharp-module.so
     mkdir -p /usr/share/dotnet/host/fxr/
     wget --no-cache -q -O /opt/altv/AltV.Net.Host.dll https://cdn.altv.mp/coreclr-module/${BRANCH}/x64_linux/AltV.Net.Host.dll
+    cat <<EOF >/opt/altv/AltV.Net.Host.runtimeconfig.json
+{
+  "runtimeOptions": {
+    "tfm": "net6",
+    "framework": {
+      "name": "Microsoft.NETCore.App",
+      "version": "6.0.0"
+    }
+  }
+}
+EOF
 fi
 
 # cleanup not needed packages

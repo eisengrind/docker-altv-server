@@ -1,5 +1,16 @@
+FROM golang:latest AS configurator
 
-FROM ubuntu:focal
+WORKDIR /usr/src/app/
+
+COPY ./tools/configurator ./
+RUN go mod download && go mod verify
+
+COPY ./tools/configurator ./
+RUN go build -o /usr/src/app/configurator -ldflags "-s -w" -v ./main.go
+
+
+
+FROM ubuntu:focal AS final
 
 ARG BRANCH=release
 ARG LIBNODE_VERSION=102
@@ -13,8 +24,10 @@ ARG INSTALL_CSHARP_MODULE=true
 ENV ALTV_SERVER_MODULES="csharp-module,js-module"
 
 COPY ./.docker/scripts/install.sh ./.docker/scripts/entrypoint.sh /root/
+COPY --from=configurator /usr/src/app/configurator /opt/altv/configurator
 
 RUN chmod +x /root/install.sh && \
+    chmod +x /opt/altv/configurator && \
     /root/install.sh && \
     rm -f /root/install.sh
 

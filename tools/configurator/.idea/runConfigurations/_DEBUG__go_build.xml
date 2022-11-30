@@ -1,0 +1,20 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="[DEBUG] go build" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="configurator" />
+    <working_directory value="$PROJECT_DIR$" />
+    <go_parameters value="-i" />
+    <parameters value="--output-filename server --output-type yaml" />
+    <envs>
+      <env name="ALTV_SERVER_CSHARP_MODULE_DISABLE_DEPENDENCY_DOWNLOAD" value="true" />
+      <env name="ALTV_SERVER_DEBUG" value="true" />
+      <env name="ALTV_SERVER_MODULES" value="js-module,csharp-module" />
+      <env name="ALTV_SERVER_WORLD_PROFILER_PORT" value="1234" />
+      <env name="ALTV_SERVER_NAME" value="My Server Name!!!!" />
+    </envs>
+    <kind value="PACKAGE" />
+    <package value="github.com/eisengrind/docker-altv-server/tools/configurator" />
+    <directory value="$PROJECT_DIR$" />
+    <filePath value="$PROJECT_DIR$" />
+    <method v="2" />
+  </configuration>
+</component>
