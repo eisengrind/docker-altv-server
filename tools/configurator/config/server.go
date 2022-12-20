@@ -1,5 +1,7 @@
 package config
 
+import "net/url"
+
 type WorldProfiler struct {
 	Host *string `env:"HOST" toml:"host" yaml:"host,omitempty"`
 	Port *uint16 `env:"PORT" toml:"port" yaml:"port,omitempty"`
@@ -35,24 +37,24 @@ type Voice struct {
 }
 
 type Server struct {
-	Name                       *string `env:"NAME" toml:"name" yaml:"name,omitempty"`
-	Host                       *string `env:"HOST" toml:"host" yaml:"host,omitempty"`
-	Port                       *uint16 `env:"PORT" toml:"port" yaml:"port,omitempty"`
-	Players                    *uint   `env:"PLAYERS" toml:"players" yaml:"players,omitempty"`
-	Password                   *string `env:"PASSWORD" toml:"password" yaml:"password,omitempty"`
-	Announce                   *bool   `env:"ANNOUNCE" toml:"announce" yaml:"announce,omitempty"`
-	Token                      *string `env:"TOKEN" toml:"token" yaml:"token,omitempty"`
-	Gamemode                   *string `env:"GAMEMODE" toml:"gamemode" yaml:"gamemode,omitempty"`
-	Website                    *string `env:"WEBSITE" toml:"website" yaml:"website,omitempty"`
-	Language                   *string `env:"LANGUAGE" toml:"language" yaml:"language,omitempty"`
-	Description                *string `env:"DESCRIPTION" toml:"description" yaml:"description,omitempty"`
-	Debug                      *bool   `env:"DEBUG" toml:"debug" yaml:"debug,omitempty"`
-	StreamingDistance          *uint   `env:"STREAMING_DISTANCE" toml:"streamingDistance" yaml:"streamingDistance,omitempty"`
-	MigrationDistance          *uint   `env:"MIGRATION_DISTANCE" toml:"migrationDistance" yaml:"migrationDistance,omitempty"`
-	Timeout                    *uint   `env:"TIMEOUT" toml:"timeout" yaml:"timeout,omitempty"`
-	AnnounceRetryErrorDelay    *uint   `env:"ANNOUNCE_RETRY_ERROR_DELAY" toml:"announceRetryErrorDelay" yaml:"announceRetryErrorDelay,omitempty"`
-	AnnounceRetryErrorAttempts *uint   `env:"ANNOUNCE_RETRY_ERROR_ATTEMPTS" toml:"announceRetryErrorAttempts" yaml:"announceRetryErrorAttempts,omitempty"`
-	DuplicatePlayers           *uint   `env:"DUPLICATE_PLAYERS" toml:"duplicatePlayers" yaml:"duplicatePlayers,omitempty"`
+	Name                       *string  `env:"NAME" toml:"name" yaml:"name,omitempty"`
+	Host                       *string  `env:"HOST" toml:"host" yaml:"host,omitempty"`
+	Port                       *uint16  `env:"PORT" toml:"port" yaml:"port,omitempty"`
+	Players                    *uint    `env:"PLAYERS" toml:"players" yaml:"players,omitempty"`
+	Password                   *string  `env:"PASSWORD" toml:"password" yaml:"password,omitempty"`
+	Announce                   *bool    `env:"ANNOUNCE" toml:"announce" yaml:"announce,omitempty"`
+	Token                      *string  `env:"TOKEN" toml:"token" yaml:"token,omitempty"`
+	Gamemode                   *string  `env:"GAMEMODE" toml:"gamemode" yaml:"gamemode,omitempty"`
+	Website                    *url.URL `env:"WEBSITE" toml:"website" yaml:"website,omitempty"`
+	Language                   *string  `env:"LANGUAGE" toml:"language" yaml:"language,omitempty"`
+	Description                *string  `env:"DESCRIPTION" toml:"description" yaml:"description,omitempty"`
+	Debug                      *bool    `env:"DEBUG" toml:"debug" yaml:"debug,omitempty"`
+	StreamingDistance          *uint    `env:"STREAMING_DISTANCE" toml:"streamingDistance" yaml:"streamingDistance,omitempty"`
+	MigrationDistance          *uint    `env:"MIGRATION_DISTANCE" toml:"migrationDistance" yaml:"migrationDistance,omitempty"`
+	Timeout                    *uint    `env:"TIMEOUT" toml:"timeout" yaml:"timeout,omitempty"`
+	AnnounceRetryErrorDelay    *uint    `env:"ANNOUNCE_RETRY_ERROR_DELAY" toml:"announceRetryErrorDelay" yaml:"announceRetryErrorDelay,omitempty"`
+	AnnounceRetryErrorAttempts *uint    `env:"ANNOUNCE_RETRY_ERROR_ATTEMPTS" toml:"announceRetryErrorAttempts" yaml:"announceRetryErrorAttempts,omitempty"`
+	DuplicatePlayers           *uint    `env:"DUPLICATE_PLAYERS" toml:"duplicatePlayers" yaml:"duplicatePlayers,omitempty"`
 
 	MapBoundsMinX *uint `env:"MAP_BOUNDS_MIN_X" toml:"mapBoundsMinX" yaml:"mapBoundsMinX,omitempty"`
 	MapBoundsMinY *uint `env:"MAP_BOUNDS_MIN_Y" toml:"mapBoundsMinY" yaml:"mapBoundsMinY,omitempty"`
@@ -65,9 +67,9 @@ type Server struct {
 	Tags              []string      `env:"TAGS" toml:"tags" yaml:"tags,omitempty,flow"`
 	ConnectionQueue   *bool         `env:"CONNECTION_QUEUE" toml:"connectionQueue" yaml:"connectionQueue,omitempty"`
 	UseEarlyAuth      *bool         `env:"USE_EARLY_AUTH" toml:"useEarlyAuth" yaml:"useEarlyAuth,omitempty"`
-	EarlyAuthUrl      *string       `env:"EARLY_AUTH_URL" toml:"earlyAuthUrl" yaml:"earlyAuthUrl,omitempty"`
+	EarlyAuthUrl      *url.URL      `env:"EARLY_AUTH_URL" toml:"earlyAuthUrl" yaml:"earlyAuthUrl,omitempty"`
 	UseCDN            *bool         `env:"USE_CDN" toml:"useCdn" yaml:"useCdn,omitempty"`
-	CDNUrl            *string       `env:"CDN_URL" toml:"cdnUrl" yaml:"cdnUrl,omitempty"`
+	CDNUrl            *url.URL      `env:"CDN_URL" toml:"cdnUrl" yaml:"cdnUrl,omitempty"`
 	SendPlayerNames   *bool         `env:"SEND_PLAYER_NAMES" toml:"sendPlayerNames" yaml:"sendPlayerNames,omitempty"`
 	Resources         []string      `env:"RESOURCES" toml:"resources" yaml:"resources,omitempty,flow"`
 	Modules           []string      `env:"MODULES" toml:"modules" yaml:"modules,omitempty,flow"`
