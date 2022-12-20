@@ -67,7 +67,7 @@ type Server struct {
 	UseEarlyAuth      *bool         `env:"USE_EARLY_AUTH" toml:"useEarlyAuth" yaml:"useEarlyAuth,omitempty"`
 	EarlyAuthUrl      *string       `env:"EARLY_AUTH_URL" toml:"earlyAuthUrl" yaml:"earlyAuthUrl,omitempty"`
 	UseCDN            *bool         `env:"USE_CDN" toml:"useCdn" yaml:"useCdn,omitempty"`
-	CDNUrl            *bool         `env:"CDN_URL" toml:"cdnUrl" yaml:"cdnUrl,omitempty"`
+	CDNUrl            *string         `env:"CDN_URL" toml:"cdnUrl" yaml:"cdnUrl,omitempty"`
 	SendPlayerNames   *bool         `env:"SEND_PLAYER_NAMES" toml:"sendPlayerNames" yaml:"sendPlayerNames,omitempty"`
 	Resources         []string      `env:"RESOURCES" toml:"resources" yaml:"resources,omitempty,flow"`
 	Modules           []string      `env:"MODULES" toml:"modules" yaml:"modules,omitempty,flow"`
