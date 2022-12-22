@@ -5,6 +5,7 @@ BRANCH=${BRANCH:-"release"}
 INSTALL_VEHMODS=${INSTALL_VEHMODS:-"true"}
 INSTALL_VEHMODELS=${INSTALL_VEHMODELS:-"true"}
 INSTALL_CLOTHES=${INSTALL_CLOTHES:-"true"}
+INSTALL_PEDMODELS=${INSTALL_PEDMODELS:-"true"}
 
 INSTALL_JS_MODULE=${INSTALL_JS_MODULE:-"true"}
 INSTALL_CSHARP_MODULE=${INSTALL_CSHARP_MODULE:-"true"}
@@ -23,6 +24,7 @@ chmod +x /opt/altv/altv-server /root/entrypoint.sh
 [ "$INSTALL_VEHMODS" = "true" ] && wget --no-cache -q -O /opt/altv/data/vehmodels.bin https://cdn.altv.mp/data/${BRANCH}/data/vehmodels.bin
 [ "$INSTALL_VEHMODELS" = "true" ] && wget --no-cache -q -O /opt/altv/data/vehmods.bin https://cdn.altv.mp/data/${BRANCH}/data/vehmods.bin
 [ "$INSTALL_CLOTHES" = "true" ] && wget --no-cache -q -O /opt/altv/data/clothes.bin https://cdn.altv.mp/data/${BRANCH}/data/clothes.bin
+[ "$INSTALL_PEDMODELS" = "true" ] && wget --no-cache -q -O /opt/altv/data/pedmodels.bin https://cdn.altv.mp/data/${BRANCH}/data/pedmodels.bin
 
 # setup optional js module
 if [ "$INSTALL_JS_MODULE" = "true" ]; then
