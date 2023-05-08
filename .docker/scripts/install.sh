@@ -29,9 +29,9 @@ chmod +x /opt/altv/altv-server /root/entrypoint.sh
 # setup optional js module
 if [ "$INSTALL_JS_MODULE" = "true" ]; then
     mkdir -p /opt/altv/modules/js-module/
-    wget --no-cache -q -O /opt/altv/modules/js-module/libnode.so.${LIBNODE_VERSION} https://cdn.altv.mp/js-module/${BRANCH}/x64_linux/modules/js-module/libnode.so.${LIBNODE_VERSION}
-    wget --no-cache -q -O /opt/altv/modules/js-module/libjs-module.so https://cdn.altv.mp/js-module/${BRANCH}/x64_linux/modules/js-module/libjs-module.so
-    wget --no-cache -q -O /opt/altv/modules/js-module/libjs-bytecode-module.so https://cdn.altv.mp/js-bytecode-module/${BRANCH}/x64_linux/modules/libjs-bytecode-module.so
+    wget --no-cache -q -O /opt/altv/modules/libnode.so.${LIBNODE_VERSION} https://cdn.altv.mp/js-module/${BRANCH}/x64_linux/modules/js-module/libnode.so.${LIBNODE_VERSION}
+    wget --no-cache -q -O /opt/altv/modules/js-module.so https://cdn.altv.mp/js-module/${BRANCH}/x64_linux/modules/js-module/libjs-module.so
+    wget --no-cache -q -O /opt/altv/modules/js-bytecode-module.so https://cdn.altv.mp/js-bytecode-module/${BRANCH}/x64_linux/modules/libjs-bytecode-module.so
 fi
 
 # setup optional csharp module
