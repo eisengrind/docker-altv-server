@@ -13,7 +13,7 @@ RUN go build -o /usr/src/app/configurator -ldflags "-s -w" -v ./main.go
 FROM ubuntu:focal AS final
 
 ARG BRANCH=release
-ARG LIBNODE_VERSION=102
+ARG LIBNODE_VERSION=108
 
 ARG INSTALL_VEHMODS=true
 ARG INSTALL_VEHMODELS=true
