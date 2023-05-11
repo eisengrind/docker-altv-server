@@ -14,10 +14,6 @@ The unofficial alt:V server Docker image.
   <p>Removed support for .NET versions older than .NET 6</p>
 </div>
 
-## About
-
-The Docker image for the alt:V server including all commonly used modules. Currently, the `js-module` and the `csharp-module` are supported. Your module can of course be added too! Feel free to make a PR to add your module!
-
 ## Usage
 
 To get started just run the Docker image as follows:
