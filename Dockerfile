@@ -1,4 +1,4 @@
-FROM golang:latest AS configurator
+FROM golang:bullseye AS configurator
 
 WORKDIR /usr/src/app/
 
