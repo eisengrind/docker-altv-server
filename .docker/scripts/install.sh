@@ -17,21 +17,21 @@ apt-get install -y wget gnupg libatomic1 libc-bin apt-transport-https
 
 # setup default altv-server files
 mkdir -p /opt/altv/modules /opt/altv/resources /opt/altv/data
-wget --no-cache -q -O /opt/altv/altv-server https://cdn.altv.mp/server/${BRANCH}/x64_linux/altv-server
+wget --no-cache -q -O /opt/altv/altv-server https://cdn.alt-mp.com/server/${BRANCH}/x64_linux/altv-server
 chmod +x /opt/altv/altv-server /root/entrypoint.sh
 
 # setup optional vehicle and clothing data
-[ "$INSTALL_VEHMODS" = "true" ] && wget --no-cache -q -O /opt/altv/data/vehmodels.bin https://cdn.altv.mp/data/${BRANCH}/data/vehmodels.bin
-[ "$INSTALL_VEHMODELS" = "true" ] && wget --no-cache -q -O /opt/altv/data/vehmods.bin https://cdn.altv.mp/data/${BRANCH}/data/vehmods.bin
-[ "$INSTALL_CLOTHES" = "true" ] && wget --no-cache -q -O /opt/altv/data/clothes.bin https://cdn.altv.mp/data/${BRANCH}/data/clothes.bin
-[ "$INSTALL_PEDMODELS" = "true" ] && wget --no-cache -q -O /opt/altv/data/pedmodels.bin https://cdn.altv.mp/data/${BRANCH}/data/pedmodels.bin
+[ "$INSTALL_VEHMODS" = "true" ] && wget --no-cache -q -O /opt/altv/data/vehmodels.bin https://cdn.alt-mp.com/data/${BRANCH}/data/vehmodels.bin
+[ "$INSTALL_VEHMODELS" = "true" ] && wget --no-cache -q -O /opt/altv/data/vehmods.bin https://cdn.alt-mp.com/data/${BRANCH}/data/vehmods.bin
+[ "$INSTALL_CLOTHES" = "true" ] && wget --no-cache -q -O /opt/altv/data/clothes.bin https://cdn.alt-mp.com/data/${BRANCH}/data/clothes.bin
+[ "$INSTALL_PEDMODELS" = "true" ] && wget --no-cache -q -O /opt/altv/data/pedmodels.bin https://cdn.alt-mp.com/data/${BRANCH}/data/pedmodels.bin
 
 # setup optional js module
 if [ "$INSTALL_JS_MODULE" = "true" ]; then
     mkdir -p /opt/altv/modules/js-module/
-    wget --no-cache -q -O /opt/altv/modules/js-module/libnode.so.${LIBNODE_VERSION} https://cdn.altv.mp/js-module/${BRANCH}/x64_linux/modules/js-module/libnode.so.${LIBNODE_VERSION}
-    wget --no-cache -q -O /opt/altv/modules/js-module/libjs-module.so https://cdn.altv.mp/js-module/${BRANCH}/x64_linux/modules/js-module/libjs-module.so
-    wget --no-cache -q -O /opt/altv/modules/js-module/libjs-bytecode-module.so https://cdn.altv.mp/js-bytecode-module/${BRANCH}/x64_linux/modules/libjs-bytecode-module.so
+    wget --no-cache -q -O /opt/altv/modules/js-module/libnode.so.${LIBNODE_VERSION} https://cdn.alt-mp.com/js-module/${BRANCH}/x64_linux/modules/js-module/libnode.so.${LIBNODE_VERSION}
+    wget --no-cache -q -O /opt/altv/modules/js-module/libjs-module.so https://cdn.alt-mp.com/js-module/${BRANCH}/x64_linux/modules/js-module/libjs-module.so
+    wget --no-cache -q -O /opt/altv/modules/js-module/libjs-bytecode-module.so https://cdn.alt-mp.com/js-bytecode-module/${BRANCH}/x64_linux/modules/libjs-bytecode-module.so
 fi
 
 # setup optional csharp module
@@ -42,9 +42,9 @@ if [ "$INSTALL_CSHARP_MODULE" = "true" ]; then
     apt-get update
     apt-get install dotnet-runtime-6.0 -y
     # install altV module
-    wget --no-cache -q -O /opt/altv/modules/libcsharp-module.so https://cdn.altv.mp/coreclr-module/${BRANCH}/x64_linux/modules/libcsharp-module.so
+    wget --no-cache -q -O /opt/altv/modules/libcsharp-module.so https://cdn.alt-mp.com/coreclr-module/${BRANCH}/x64_linux/modules/libcsharp-module.so
     mkdir -p /usr/share/dotnet/host/fxr/
-    wget --no-cache -q -O /opt/altv/AltV.Net.Host.dll https://cdn.altv.mp/coreclr-module/${BRANCH}/x64_linux/AltV.Net.Host.dll
+    wget --no-cache -q -O /opt/altv/AltV.Net.Host.dll https://cdn.alt-mp.com/coreclr-module/${BRANCH}/x64_linux/AltV.Net.Host.dll
     cat <<EOF >/opt/altv/AltV.Net.Host.runtimeconfig.json
 {
   "runtimeOptions": {
