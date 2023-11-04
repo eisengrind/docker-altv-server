@@ -6,6 +6,8 @@ INSTALL_VEHMODS=${INSTALL_VEHMODS:-"true"}
 INSTALL_VEHMODELS=${INSTALL_VEHMODELS:-"true"}
 INSTALL_CLOTHES=${INSTALL_CLOTHES:-"true"}
 INSTALL_PEDMODELS=${INSTALL_PEDMODELS:-"true"}
+INSTALL_RPFDATA=${INSTALL_RPFDATA:-"true"}
+INSTALL_WEAPONMODELS=${INSTALL_WEAPONMODELS:-"true"}
 
 INSTALL_JS_MODULE=${INSTALL_JS_MODULE:-"true"}
 INSTALL_CSHARP_MODULE=${INSTALL_CSHARP_MODULE:-"true"}
@@ -25,6 +27,8 @@ chmod +x /opt/altv/altv-server /root/entrypoint.sh
 [ "$INSTALL_VEHMODELS" = "true" ] && wget --no-cache -q -O /opt/altv/data/vehmods.bin https://cdn.alt-mp.com/data/${BRANCH}/data/vehmods.bin
 [ "$INSTALL_CLOTHES" = "true" ] && wget --no-cache -q -O /opt/altv/data/clothes.bin https://cdn.alt-mp.com/data/${BRANCH}/data/clothes.bin
 [ "$INSTALL_PEDMODELS" = "true" ] && wget --no-cache -q -O /opt/altv/data/pedmodels.bin https://cdn.alt-mp.com/data/${BRANCH}/data/pedmodels.bin
+[ "$INSTALL_RPFDATA" = "true" ] && wget --no-cache -q -O /opt/altv/data/rpfdata.bin https://cdn.alt-mp.com/data/${BRANCH}/data/rpfdata.bin
+[ "$INSTALL_WEAPONMODELS" = "true" ] && wget --no-cache -q -O /opt/altv/data/weaponmodels.bin https://cdn.alt-mp.com/data/${BRANCH}/data/weaponmodels.bin
 
 # setup optional js module
 if [ "$INSTALL_JS_MODULE" = "true" ]; then
